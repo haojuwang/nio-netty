@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package tutorial;
+
+option java_package = "com.lihao.netty.api";
+option java_outer_classname = "Users";
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResult {
+    string uid = 1;
+    string username = 2;
+    int32 age = 3;
+    string token = 4;
+    string avatar = 5;
+}
+
+message LogOutRequest {
+    string uid = 1;
+    string token = 2;
+}
+
+message LogOutResult {
+    int32 code = 1;
+    string message = 2;
+}
+
+message Api {
+    LoginRequest loginRequest = 1;
+    LoginResult loginResult = 2;
+    LogOutRequest logOutRequest = 3;
+    LogOutResult logOutResult = 4;
+}

@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package com.lihao.netty.api;
+
+option optimize_for = SPEED;
+option java_package = "com.lihao.netty.api";
+option java_outer_classname = "Patients";
+
+
+message Patient {
+    string id = 1;
+    string name = 2;
+    int32 age = 3;
+
+}
+
+//返回列表
+message PatientListResponse {
+    repeated Patient patientList = 1;
+}
+
+message PatientListRequest {
+    string uid = 1;
+}
+
+
+message PatientDetailRequest {
+    string uid = 1;
+    string pid = 2;
+}
+
+message PatientDetailResponse {
+    Patient patient = 1;
+}
+
+message Api {
+    enum ApiType {
+        PatientListResponseType = 0;
+        PatientListRequestType = 1;
+        PatientDetailRequestType = 2;
+        PatientDetailResponseType = 3;
+
+    }
+
+    ApiType api_type = 1;
+
+    // 一下同一时间只能访问一个
+    oneof data_type {
+        PatientListResponse patientListResponse = 2;
+
+        PatientListRequest patientListRequest = 3;
+
+        PatientDetailRequest patientDetailRequest = 4;
+
+        PatientDetailResponse patientDetailResponse = 5;
+
+    }
+
+
+}
+
+

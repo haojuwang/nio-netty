@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.lihao.netty.grpc.test";
+option java_outer_classname = "Hospital";
+
+package proto;
+
+message SearchRequest {
+    string query = 1;
+    int32 id = 2;
+    int32 level = 3;
+
+
+}
+
+message SearchNameRequest{
+    reserved 2,15,9 to 11;
+    reserved "age","level";
+
+    string name = 1;
+
+
+
+}
