@@ -11,6 +11,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 
+
 public class TimeServer {
 
     public void bind(int port) {
@@ -22,7 +23,8 @@ public class TimeServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-//                .option(ChannelOption.SO_BACKLOG, 1024)
+                    .option(ChannelOption.SO_BACKLOG, 1024)
+
                     .childHandler(new ChildChannelHandler());
 
 
@@ -42,15 +44,15 @@ public class TimeServer {
 
     }
 
-    public static class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
+    public static class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
         @Override
         protected void initChannel(SocketChannel ch) throws Exception {
             ChannelPipeline pipline = ch.pipeline();
-            pipline.addLast(new DelimiterBasedFrameDecoder(4096, Delimiters.lineDelimiter()));
+//            pipline.addLast(new DelimiterBasedFrameDecoder(4096, Delimiters.lineDelimiter()));
             pipline.addLast(new StringDecoder(CharsetUtil.UTF_8));
             pipline.addLast(new StringEncoder(CharsetUtil.UTF_8));
-            pipline.addLast(new TimeServerHandler() );
+            pipline.addLast(new TimeServerHandler());
         }
     }
 

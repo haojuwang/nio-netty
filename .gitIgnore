@@ -3,3 +3,5 @@
 /.idea/
 .idea/workspace.xml
 
+/settings.gradle
+/nio-netty.iml

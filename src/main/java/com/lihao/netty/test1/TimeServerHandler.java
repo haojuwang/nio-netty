@@ -18,10 +18,11 @@ public class TimeServerHandler extends SimpleChannelInboundHandler<String> {
         for(int i=0;i<100000;i++) {
 
         }
-        ctx.channel().writeAndFlush(currentTime+"\r\n");
+//        ctx.channel().writeAndFlush(currentTime+"\r\n");
+        ctx.channel().writeAndFlush(currentTime);
 
         ctx.channel().close();
-//        ctx.close();
+        ctx.close();
 
     }
 
