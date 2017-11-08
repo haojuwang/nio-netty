@@ -49,6 +49,9 @@ dependencies {
 
     compile 'org.apache.thrift:libthrift:0.10.0'
 
+//    compile 'org.msgpack:msgpack-core:0.8.13'
+    compile 'org.msgpack:msgpack:0.6.12'
+
 
 
 

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.lihao.netty.protobuf";
+option java_outer_classname = "UserInfoPb";
+
+package proto;
+
+message UserInfo {
+
+    string userName =1;
+    string address =2;
+    string desc =3;
+     int32 userId = 4;
+
+}

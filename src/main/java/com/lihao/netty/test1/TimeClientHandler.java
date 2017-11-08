@@ -20,7 +20,7 @@ public class TimeClientHandler extends SimpleChannelInboundHandler<String> {
         for(int i=0;i<100;i++) {
             result +="first--->";
         }
-        ctx.channel().writeAndFlush(result);
+        ctx.channel().writeAndFlush(result+"\r\n");
 
         System.out.println("send ...");
 
