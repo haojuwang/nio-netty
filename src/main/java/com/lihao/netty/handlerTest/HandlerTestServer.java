@@ -11,6 +11,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.base64.Base64Decoder;
 import io.netty.handler.codec.base64.Base64Encoder;
+import io.netty.handler.codec.json.JsonObjectDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
@@ -31,7 +32,7 @@ public class HandlerTestServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.DEBUG))
+                    .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
@@ -43,9 +44,12 @@ public class HandlerTestServer {
 
 //                            cp.addLast("base643",new Base64Encoder());
 
+//                            cp.addLast("4", new JsonObjectDecoder());
                             cp.addLast("2", new StringDecoder(CharsetUtil.UTF_8));
                             cp.addLast("3", new StringEncoder(CharsetUtil.UTF_8));
                             cp.addLast("4", new Base64Encoder());
+                            cp.addLast("6",new LoggingHandler());
+
                             cp.addLast("5", new MyHandler());
 
 //                            cp.addLast("base64",new Base64Decoder());

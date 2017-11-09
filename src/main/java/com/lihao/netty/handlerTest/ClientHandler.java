@@ -1,5 +1,8 @@
 package com.lihao.netty.handlerTest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.lihao.netty.decode.UserInfo;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -19,7 +22,13 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
 
         Thread.sleep(2000);
 
-        ctx.channel().write("sssss"+line);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(1000);
+        userInfo.setUserName("李浩");
+        Gson gson = new Gson();
+       String json = gson.toJson(userInfo);
+
+        ctx.channel().write(Unpooled.copiedBuffer(json.getBytes()));
         ctx.channel().writeAndFlush(line);
 
     }
